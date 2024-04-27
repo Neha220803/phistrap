@@ -1,0 +1,27 @@
+name: phistrap
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+
+dependencies:
+  baseflow_plugin_template: ^2.1.2
+  call_log: ^4.0.0
+  convex_bottom_bar: ^3.2.0
+  fast_contacts: ^1.1.1
+  permission_handler: ^8.1.6
+  flutter:
+    sdk: flutter
+  intl: ^0.19.0
+  flutter_sms_inbox: ^1.0.3
+  http: ^1.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
