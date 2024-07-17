@@ -105,9 +105,9 @@ class _CallLogScreenState extends State<CallLogScreen> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors
-                          .white, // Set the background color to transparent
-                      onPrimary: Colors.black, // Set the text color to black
+                      foregroundColor: Colors.black,
+                      backgroundColor:
+                          Colors.white, // Set the text color to black
                       side: BorderSide(
                           color: Colors.red), // Set the border color to red
                       minimumSize: Size(0,
