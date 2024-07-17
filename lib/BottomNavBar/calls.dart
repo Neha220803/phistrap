@@ -4,11 +4,13 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:intl/intl.dart';
 
 class CallLogScreen extends StatefulWidget {
+  const CallLogScreen({super.key});
+
   @override
-  _CallLogScreenState createState() => _CallLogScreenState();
+  CallLogScreenState createState() => CallLogScreenState();
 }
 
-class _CallLogScreenState extends State<CallLogScreen> {
+class CallLogScreenState extends State<CallLogScreen> {
   List<CallLogEntry> callLogs = [];
   List<CallLogEntry> filteredLogs = [];
   bool isFilterApplied = false;
@@ -65,19 +67,20 @@ class _CallLogScreenState extends State<CallLogScreen> {
             iconColor = Colors.red;
             leadingIcon = Icons.call_missed;
           } else {
-            iconColor = Color(0xFF000000); // Default color for unknown types
+            iconColor =
+                const Color(0xFF000000); // Default color for unknown types
             leadingIcon = Icons.call; // Default icon for unknown types
           }
 
           return Card(
             elevation: 4.0,
-            margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             shape: RoundedRectangleBorder(
-              side: BorderSide(color: Color(00000), width: 2.0),
+              side: const BorderSide(color: Color(0x00000000), width: 2.0),
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: ListTile(
-              tileColor: Color.fromARGB(255, 255, 255, 255),
+              tileColor: const Color.fromARGB(255, 255, 255, 255),
               leading: Icon(
                 leadingIcon,
                 color: iconColor,
@@ -98,7 +101,7 @@ class _CallLogScreenState extends State<CallLogScreen> {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return AlertDialog(
+                          return const AlertDialog(
                             title: Text("Report Submitted"),
                           );
                         },
@@ -108,12 +111,12 @@ class _CallLogScreenState extends State<CallLogScreen> {
                       foregroundColor: Colors.black,
                       backgroundColor:
                           Colors.white, // Set the text color to black
-                      side: BorderSide(
+                      side: const BorderSide(
                           color: Colors.red), // Set the border color to red
-                      minimumSize: Size(0,
+                      minimumSize: const Size(0,
                           30), // Set the minimum size to make it as small as possible
                     ),
-                    child: Text("Report Spam"),
+                    child: const Text("Report Spam"),
                   ),
                 ],
               ),
@@ -125,75 +128,9 @@ class _CallLogScreenState extends State<CallLogScreen> {
   }
 
   Future<void> _refreshData() async {
-    _clearFilter(); // Clear any applied filter
     await _loadCallLogs(); // Reload call logs
   }
 
-  void _showFilterDialog() async {
-    final selectedValue = await showDialog<CallType>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Filter Call Type'),
-          content: DropdownButtonFormField<CallType>(
-            value: selectedCallType,
-            items: [
-              DropdownMenuItem(
-                value: CallType.incoming,
-                child: Text('Incoming Calls'),
-              ),
-              DropdownMenuItem(
-                value: CallType.outgoing,
-                child: Text('Outgoing Calls'),
-              ),
-              DropdownMenuItem(
-                value: CallType.missed,
-                child: Text('Missed Calls'),
-              ),
-            ],
-            onChanged: (value) {
-              setState(() {
-                selectedCallType = value;
-              });
-            },
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                _applyFilter();
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _applyFilter() {
-    if (selectedCallType != null) {
-      setState(() {
-        filteredLogs =
-            callLogs.where((log) => log.callType == selectedCallType).toList();
-        isFilterApplied = true;
-      });
-    }
-  }
-
-  void _clearFilter() {
-    setState(() {
-      isFilterApplied = false;
-      selectedCallType = null; // Clear selected call type
-      filteredLogs.clear(); // Clear filtered logs
-    });
-  }
 
   String _formatDuration(int? seconds) {
     if (seconds == null) return 'Unknown';
