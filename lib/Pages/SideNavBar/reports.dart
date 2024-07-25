@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:phistrap/Utils/constants.dart';
 
 class Report extends StatefulWidget {
   const Report({super.key});
@@ -14,20 +13,20 @@ class _ReportState extends State<Report> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Reports',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: white),
         ),
-        backgroundColor: Color(0xFF002D56),
-        iconTheme: IconThemeData(color: Colors.white), // Set the icon color
+        backgroundColor: primaryColor,
+        iconTheme: const IconThemeData(color: white), // Set the icon color
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Text("Suspecious URLs"),
+            const Text("Suspecious URLs"),
             GestureDetector(
-              child: Card(
+              child: const Card(
                 elevation: 4,
                 child: ListTile(
                   title: Text("https://smbc-card.myfamilypharmacy.net"),
@@ -39,50 +38,50 @@ class _ReportState extends State<Report> {
                 _showPopup(context);
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Card(
+            const Card(
               elevation: 4,
               child: ListTile(
                 title: Text("	http://jhvjhkbv.ubpages.com/xjhch/"),
                 trailing: Icon(Icons.forward),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Card(
+            const Card(
               elevation: 4,
               child: ListTile(
                 title: Text("	https://dcgfrmz029.wixsite.com/my-site"),
                 trailing: Icon(Icons.forward),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Card(
+            const Card(
               elevation: 4,
               child: ListTile(
                 title: Text("https://mrbw50660.wixsite.com/my-site"),
                 trailing: Icon(Icons.forward),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Card(
+            const Card(
               elevation: 4,
               child: ListTile(
                 title: Text("	https://mailzim.webflow.io/"),
                 trailing: Icon(Icons.forward),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Card(
+            const Card(
               elevation: 4,
               child: ListTile(
                 title: Text("	https://youhavetoupgarde.weeblysite.com/"),
@@ -102,17 +101,17 @@ class _ReportState extends State<Report> {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: AlertDialog(
-            title: Text('Trace Back Route'),
+            title: const Text('Trace Back Route'),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
                   DataTable(
-                    columns: [
+                    columns: const [
                       DataColumn(label: Text('Hop')),
                       DataColumn(label: Text('IP Address')),
                       DataColumn(label: Text('Domain Name')),
                     ],
-                    rows: [
+                    rows: const [
                       DataRow(cells: [
                         DataCell(Text('1')),
                         DataCell(Text('169.254.158.58')),
@@ -166,7 +165,7 @@ class _ReportState extends State<Report> {
             ),
             actions: <Widget>[
               TextButton(
-                child: Text('OK'),
+                child: const Text('OK'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

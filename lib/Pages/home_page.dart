@@ -1,11 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:phistrap/BottomNavBar/calls.dart';
-import 'package:phistrap/BottomNavBar/emal_page.dart';
-import 'package:phistrap/BottomNavBar/link_page.dart';
-import 'package:phistrap/BottomNavBar/mssg_page.dart';
-import 'package:phistrap/SideNavBar/sideNavBar.dart';
+import 'package:phistrap/Pages/BottomNavBar/calls_page.dart';
+import 'package:phistrap/Pages/BottomNavBar/email_page.dart';
+import 'package:phistrap/Pages/BottomNavBar/link_page.dart';
+import 'package:phistrap/Pages/BottomNavBar/mssg_page.dart';
+import 'package:phistrap/Pages/SideNavBar/side_nav_bar.dart';
+import 'package:phistrap/Utils/constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,23 +19,23 @@ class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController();
 
   static final List<Widget> _widgetOptions = <Widget>[
-    CallLogScreen(),
-    SMSPage(),
-    EmailScreen(),
-    LinkPage(),
+    const CallLogScreen(),
+    const SMSPage(),
+    const EmailScreen(),
+    const LinkPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideBar(),
+      drawer: const SideBar(),
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Phis-Trap",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: white),
         ),
-        backgroundColor: Color(0xFF002D56),
-        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: primaryColor,
+        iconTheme: const IconThemeData(color: white),
       ),
       body: Column(
         children: [
@@ -55,20 +56,20 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor: Color(0xFF002D56),
+        backgroundColor: primaryColor,
         items: <TabItem>[
-          TabItem(
+          const TabItem(
             icon: Icons.call,
             title: 'Calls',
           ),
-          TabItem(icon: Icons.message, title: 'SMS'),
-          TabItem(icon: Icons.email, title: 'email'),
-          TabItem(icon: Icons.link, title: 'Link'),
+          const TabItem(icon: Icons.message, title: 'SMS'),
+          const TabItem(icon: Icons.email, title: 'email'),
+          const TabItem(icon: Icons.link, title: 'Link'),
         ],
         onTap: (int index) {
           _pageController.animateToPage(
             index,
-            duration: Duration(milliseconds: 700),
+            duration: const Duration(milliseconds: 700),
             curve: Curves.easeInOut,
           );
           setState(() {

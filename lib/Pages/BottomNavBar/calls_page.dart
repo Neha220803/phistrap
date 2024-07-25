@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:call_log/call_log.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:intl/intl.dart';
+import 'package:phistrap/Utils/constants.dart';
 
 class CallLogScreen extends StatefulWidget {
   const CallLogScreen({super.key});
@@ -15,7 +16,7 @@ class CallLogScreenState extends State<CallLogScreen> {
   List<CallLogEntry> filteredLogs = [];
   bool isFilterApplied = false;
   CallType? selectedCallType;
-  bool isDarkThemeEnabled = false; // Variable to track the state of the theme
+  bool isDarkThemeEnabled = false;
 
   @override
   void initState() {
@@ -58,20 +59,18 @@ class CallLogScreenState extends State<CallLogScreen> {
           IconData leadingIcon;
 
           if (log.callType == CallType.incoming) {
-            iconColor = Colors.blue;
+            iconColor = blue;
             leadingIcon = Icons.call_received;
           } else if (log.callType == CallType.outgoing) {
-            iconColor = Colors.green;
+            iconColor = green;
             leadingIcon = Icons.call_made;
           } else if (log.callType == CallType.missed) {
-            iconColor = Colors.red;
+            iconColor = red;
             leadingIcon = Icons.call_missed;
           } else {
-            iconColor =
-                const Color(0xFF000000); // Default color for unknown types
+            iconColor = black; // Default color for unknown types
             leadingIcon = Icons.call; // Default icon for unknown types
           }
-
           return Card(
             elevation: 4.0,
             margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -80,7 +79,7 @@ class CallLogScreenState extends State<CallLogScreen> {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: ListTile(
-              tileColor: const Color.fromARGB(255, 255, 255, 255),
+              tileColor: white,
               leading: Icon(
                 leadingIcon,
                 color: iconColor,
@@ -108,11 +107,10 @@ class CallLogScreenState extends State<CallLogScreen> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor:
-                          Colors.white, // Set the text color to black
+                      foregroundColor: black,
+                      backgroundColor: white, // Set the text color to black
                       side: const BorderSide(
-                          color: Colors.red), // Set the border color to red
+                          color: red), // Set the border color to red
                       minimumSize: const Size(0,
                           30), // Set the minimum size to make it as small as possible
                     ),
@@ -130,7 +128,6 @@ class CallLogScreenState extends State<CallLogScreen> {
   Future<void> _refreshData() async {
     await _loadCallLogs(); // Reload call logs
   }
-
 
   String _formatDuration(int? seconds) {
     if (seconds == null) return 'Unknown';

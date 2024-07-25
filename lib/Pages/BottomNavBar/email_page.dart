@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:phistrap/Utils/constants.dart';
 
 class EmailData {
   final String sender;
@@ -19,11 +20,13 @@ class EmailData {
 }
 
 class EmailScreen extends StatefulWidget {
+  const EmailScreen({super.key});
+
   @override
-  _EmailScreenState createState() => _EmailScreenState();
+  EmailScreenState createState() => EmailScreenState();
 }
 
-class _EmailScreenState extends State<EmailScreen> {
+class EmailScreenState extends State<EmailScreen> {
   late Future<List<EmailData>> futureEmailData;
   late ScrollController _scrollController;
   List<EmailData> emails = [];
@@ -45,7 +48,6 @@ class _EmailScreenState extends State<EmailScreen> {
       fetchEmailData();
     }
   }
-  
 
   Future<List<EmailData>> fetchEmailData() async {
     final response =
@@ -67,7 +69,7 @@ class _EmailScreenState extends State<EmailScreen> {
       future: futureEmailData,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasError) {
@@ -75,7 +77,7 @@ class _EmailScreenState extends State<EmailScreen> {
             child: Text('Error: ${snapshot.error}'),
           );
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(
+          return const Center(
             child: Text('No emails available.'),
           );
         } else {
@@ -84,7 +86,7 @@ class _EmailScreenState extends State<EmailScreen> {
             itemCount: 30,
             itemBuilder: (context, index) {
               return Card(
-                color: Colors.white,
+                color: white,
                 elevation: 4,
                 child: ListTile(
                   title: Text(snapshot.data![index].sender),

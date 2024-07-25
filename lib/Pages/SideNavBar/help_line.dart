@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:phistrap/Utils/constants.dart';
 
 class HelpLine extends StatefulWidget {
-  const HelpLine({Key? key});
+  const HelpLine({super.key});
 
   @override
   State<HelpLine> createState() => _HelpLineState();
@@ -14,12 +13,12 @@ class _HelpLineState extends State<HelpLine> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Help Line',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: white),
         ),
-        backgroundColor: Color(0xFF002D56),
-        iconTheme: IconThemeData(color: Colors.white), // Set the icon color
+        backgroundColor: primaryColor,
+        iconTheme: const IconThemeData(color: white), // Set the icon color
       ),
       body: Center(
         child: Padding(
@@ -75,20 +74,20 @@ class _HelpLineState extends State<HelpLine> {
       shadowColor: Colors.black,
       borderOnForeground: true,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.black, width: 2),
+        side: const BorderSide(color: Colors.black, width: 2),
         borderRadius: BorderRadius.circular(10),
       ),
       child: ListTile(
-        leading: Icon(Icons.person),
+        leading: const Icon(Icons.person),
         title: Text(
           title,
-          style: TextStyle(fontSize: 24),
+          style: const TextStyle(fontSize: 24),
         ),
         subtitle: Text(
           subtitle,
-          style: TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20),
         ),
-        trailing: Icon(Icons.phone),
+        trailing: const Icon(Icons.phone),
       ),
     );
   }

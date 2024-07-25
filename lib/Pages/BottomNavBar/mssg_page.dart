@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sms_inbox/flutter_sms_inbox.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
+import 'package:phistrap/Utils/constants.dart';
 
 class SMSPage extends StatefulWidget {
   const SMSPage({super.key});
@@ -13,7 +14,7 @@ class SMSPage extends StatefulWidget {
 class _SMSPageState extends State<SMSPage> {
   final SmsQuery _query = SmsQuery();
   List<SmsMessage> _messages = [];
-  Map<int, String> _translatedMessages = {};
+  final Map<int, String> _translatedMessages = {};
 
   @override
   void initState() {
@@ -44,7 +45,7 @@ class _SMSPageState extends State<SMSPage> {
     try {
       for (var message in _messages) {
         final response = await http.post(
-          Uri.parse('http://172.31.98.196:80/predict'),
+          Uri.parse('https://spam-detection-api-0r5c.onrender.com/predict'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -63,6 +64,7 @@ class _SMSPageState extends State<SMSPage> {
         }
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Error fetching translated message: $e');
     }
   }
@@ -77,7 +79,7 @@ class _SMSPageState extends State<SMSPage> {
                 messages: _messages,
                 translatedMessages: _translatedMessages,
               )
-            : Center(
+            : const Center(
                 child: Text(
                   'No messages to show.\n Tap refresh button...',
                   textAlign: TextAlign.center,
@@ -112,7 +114,7 @@ class _MessagesListView extends StatelessWidget {
         var translatedMessage = translatedMessages[message.id] ?? '';
         var isTranslatedToOne = translatedMessage == '1';
         var cardColor =
-            isTranslatedToOne ? Color.fromARGB(255, 221, 35, 22) : Colors.white;
+            isTranslatedToOne ? const Color.fromARGB(255, 221, 35, 22) : white;
 
         return Card(
           elevation: 4,
@@ -124,11 +126,11 @@ class _MessagesListView extends StatelessWidget {
               children: [
                 Text(
                   '${message.sender}',
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
                 Text(
                   '${message.date},',
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                 )
               ],
             ),

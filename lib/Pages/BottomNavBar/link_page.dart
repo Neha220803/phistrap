@@ -4,9 +4,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:phistrap/Utils/constants.dart';
 
 class LinkPage extends StatefulWidget {
-  const LinkPage({Key? key});
+  const LinkPage({super.key});
 
   @override
   State<LinkPage> createState() => _LinkPageState();
@@ -36,14 +37,14 @@ class _LinkPageState extends State<LinkPage> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(
-                    color: Color(0xFF002D56),
+                    color: primaryColor,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(
                     width: 2.5,
-                    color: Color(0xFF002D56),
+                    color: primaryColor,
                   ),
                 ),
                 contentPadding:
@@ -66,8 +67,8 @@ class _LinkPageState extends State<LinkPage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
-                backgroundColor: Color(0xFF002D56),
-                foregroundColor: Colors.white,
+                backgroundColor: primaryColor,
+                foregroundColor: white,
                 fixedSize: const Size(350, 50),
               ),
               onPressed: () {
@@ -78,7 +79,7 @@ class _LinkPageState extends State<LinkPage> {
                 'Submit',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: white,
                   fontSize: 19.32,
                   fontFamily: 'Open Sans',
                   fontWeight: FontWeight.w600,
@@ -95,7 +96,7 @@ class _LinkPageState extends State<LinkPage> {
   Future<void> _sendRequest(String url) async {
     try {
       var response = await http.post(
-        Uri.parse('http://172.31.98.196:4000'),
+        Uri.parse('https://phising-url-api.onrender.com/'),
         body: json.encode({'url': url}),
         headers: {'Content-Type': 'application/json'},
       );
@@ -132,7 +133,7 @@ class _LinkPageState extends State<LinkPage> {
               children: [
                 Text("Results for the URL is listed down below:"),
                 // SizedBox(height: 10),
-                Text("$_responseMessage"),
+                Text(_responseMessage),
               ],
             ),
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phistrap/login_page.dart';
+import 'package:phistrap/Pages/login_page.dart';
 
 void main() {
   runApp(const MainApp());

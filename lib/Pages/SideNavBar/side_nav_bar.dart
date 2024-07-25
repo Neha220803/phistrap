@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:phistrap/SideNavBar/helpLine.dart';
-import 'package:phistrap/SideNavBar/reports.dart';
-import 'package:phistrap/login_page.dart';
+import 'package:phistrap/Pages/SideNavBar/help_line.dart';
+import 'package:phistrap/Pages/SideNavBar/reports.dart';
+import 'package:phistrap/Pages/login_page.dart';
+import 'package:phistrap/Utils/constants.dart';
 
 class SideBar extends StatefulWidget {
   const SideBar({super.key});
@@ -23,15 +22,22 @@ class _SideBarState extends State<SideBar> {
           Container(
             width: 341,
             height: 250,
-            decoration: BoxDecoration(color: Color(0xFF002D56)),
-            child: Column(
+            decoration: const BoxDecoration(color: primaryColor),
+            child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 109,
                     height: 109,
-                    child: CircleAvatar(backgroundColor: Colors.blueGrey),
+                    child: CircleAvatar(
+                      backgroundColor: opaquePrimaryColor,
+                      child: Icon(
+                        Icons.person,
+                        size: 70,
+                        color: Colors.white,
+                      ),
+                    ),
                     // decoration: ShapeDecoration(
                     //   // image: DecorationImage(
                     //   //   image: AssetImage("images/u0.png"),
@@ -48,10 +54,10 @@ class _SideBarState extends State<SideBar> {
                     width: 143,
                     height: 26.60,
                     child: Text(
-                      "skdhv",
+                      "Neha",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: white,
                         fontSize: 23,
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w700,
@@ -67,7 +73,7 @@ class _SideBarState extends State<SideBar> {
                       'View Profile',
                       style: TextStyle(
                         decoration: TextDecoration.underline,
-                        color: Colors.white,
+                        color: white,
                         fontSize: 11,
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w400,
@@ -78,68 +84,68 @@ class _SideBarState extends State<SideBar> {
                 ]),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.search),
-            title: Text("Spam Analytics"),
+            leading: const Icon(Icons.search),
+            title: const Text("Spam Analytics"),
             onTap: () {
               // Navigator.push(
               //     context, MaterialPageRoute(builder: (context) => searComm()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.help),
-            title: Text('Helpline Forum'),
+            leading: const Icon(Icons.help),
+            title: const Text('Helpline Forum'),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HelpLine()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HelpLine()));
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.report),
-            title: Text("Report"),
+            leading: const Icon(Icons.report),
+            title: const Text("Report"),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Report()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Report()));
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text("Profile"),
+            leading: const Icon(Icons.person),
+            title: const Text("Profile"),
             onTap: () {
               // Navigator.push(context,
               //     MaterialPageRoute(builder: (context) => Invitations()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("Settings"),
+            leading: const Icon(Icons.settings),
+            title: const Text("Settings"),
             onTap: () {
               // Navigator.push(context,
               //     MaterialPageRoute(builder: (context) => PaymentPage()));
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.arrow_back),
-            title: Text("Log Out"),
+            leading: const Icon(Icons.arrow_back),
+            title: const Text("Log Out"),
             onTap: () async {
               // FirebaseAuth.instance.signOut();
               Navigator.of(context).popUntil((route) => route.isFirst);
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => LogIn()),
+                MaterialPageRoute(builder: (context) => const LogIn()),
               );
             },
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
     ));
