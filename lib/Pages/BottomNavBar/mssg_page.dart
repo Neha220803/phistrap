@@ -35,17 +35,17 @@ class _SMSPageState extends State<SMSPage> {
       debugPrint('SMS inbox messages: ${messages.length}');
 
       setState(() => _messages = messages);
-      _fetchTranslatedMessages(); // Fetch translated message for each SMS
+      fetchTranslatedMessages(); // Fetch translated message for each SMS
     } else {
       await Permission.sms.request();
     }
   }
 
-  Future<void> _fetchTranslatedMessages() async {
+  Future<void> fetchTranslatedMessages() async {
     try {
       for (var message in _messages) {
         final response = await http.post(
-          Uri.parse('https://spam-detection-api-0r5c.onrender.com/predict'),
+          Uri.parse('$baseURl/spam-detection'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -114,7 +114,7 @@ class _MessagesListView extends StatelessWidget {
         var translatedMessage = translatedMessages[message.id] ?? '';
         var isTranslatedToOne = translatedMessage == '1';
         var cardColor =
-            isTranslatedToOne ? const Color.fromARGB(255, 221, 35, 22) : white;
+            isTranslatedToOne ? red : white;
 
         return Card(
           elevation: 4,

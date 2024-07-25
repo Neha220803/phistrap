@@ -1,10 +1,10 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:phistrap/Utils/constants.dart';
+import 'package:phistrap/Widgets/custom_button.dart';
+import 'package:phistrap/Widgets/custom_text.dart';
+import 'package:phistrap/Widgets/custom_text_field.dart';
 
 class LinkPage extends StatefulWidget {
   const LinkPage({super.key});
@@ -21,73 +21,32 @@ class _LinkPageState extends State<LinkPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
       child: Column(
         children: [
-          Text(
-            "Check Any URL's Content",
-            style: TextStyle(fontSize: 20),
+          const CustomText(
+            value: "Check Any URL's Content",
+            size: 20,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Form(
             key: _formKey,
-            child: TextFormField(
+            child: CustomTextField(
+              labelText: "Enter a link",
+              errorText: "Please Enter a link",
               controller: _linkController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide(
-                    color: primaryColor,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide(
-                    width: 2.5,
-                    color: primaryColor,
-                  ),
-                ),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                hintText: "Enter any Link",
-                alignLabelWithHint: true,
-              ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your email';
-                }
-                return null;
-              },
             ),
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           Center(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(13),
-                ),
-                backgroundColor: primaryColor,
-                foregroundColor: white,
-                fixedSize: const Size(350, 50),
-              ),
-              onPressed: () {
-                _sendRequest(_linkController.text);
-                _passUrl(_linkController.text);
-              },
-              child: Text(
-                'Submit',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: white,
-                  fontSize: 19.32,
-                  fontFamily: 'Open Sans',
-                  fontWeight: FontWeight.w600,
-                  height: 0,
-                ),
-              ),
-            ),
-          )
+              child: CustomButton(
+                  text: "Submit",
+                  color: primaryColor,
+                  fixedSize: const Size(350, 55),
+                  callback: () {
+                    _sendRequest(_linkController.text);
+                    _passUrl(_linkController.text);
+                  }))
         ],
       ),
     );
@@ -126,12 +85,12 @@ class _LinkPageState extends State<LinkPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Result"),
+          title: const Text("Result"),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Results for the URL is listed down below:"),
+                const Text("Results for the URL is listed down below:"),
                 // SizedBox(height: 10),
                 Text(_responseMessage),
               ],

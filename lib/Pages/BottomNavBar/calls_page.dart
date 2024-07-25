@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:call_log/call_log.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:intl/intl.dart';
+import 'package:phistrap/Functions/format_date_time.dart';
 import 'package:phistrap/Utils/constants.dart';
 
 class CallLogScreen extends StatefulWidget {
@@ -44,6 +44,10 @@ class CallLogScreenState extends State<CallLogScreen> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
     ));
+  }
+
+  Future<void> _refreshData() async {
+    await _loadCallLogs(); // Reload call logs
   }
 
   @override
@@ -93,7 +97,7 @@ class CallLogScreenState extends State<CallLogScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Duration: ${_formatDuration(log.duration)} | Time: ${_formatTime(log.timestamp)}',
+                    'Duration: ${formatDuration(log.duration)} | Time: ${formatTime(log.timestamp)}',
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -123,21 +127,5 @@ class CallLogScreenState extends State<CallLogScreen> {
         },
       ),
     );
-  }
-
-  Future<void> _refreshData() async {
-    await _loadCallLogs(); // Reload call logs
-  }
-
-  String _formatDuration(int? seconds) {
-    if (seconds == null) return 'Unknown';
-    final Duration duration = Duration(seconds: seconds);
-    return duration.toString().split('.').first.padLeft(8, "0");
-  }
-
-  String _formatTime(int? timestamp) {
-    if (timestamp == null) return 'Unknown';
-    final DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
-    return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
   }
 }

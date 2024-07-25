@@ -1,23 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:phistrap/Data/Models/email_model.dart';
 import 'package:phistrap/Utils/constants.dart';
-
-class EmailData {
-  final String sender;
-  final String subject;
-  final String body;
-
-  EmailData({required this.sender, required this.subject, required this.body});
-
-  factory EmailData.fromJson(Map<String, dynamic> json) {
-    return EmailData(
-      sender: json['sender'],
-      subject: json['subject'],
-      body: json['body'],
-    );
-  }
-}
 
 class EmailScreen extends StatefulWidget {
   const EmailScreen({super.key});
@@ -43,7 +28,6 @@ class EmailScreenState extends State<EmailScreen> {
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
-      // Load the next set of emails when the user reaches the end of the list
       offset += 20;
       fetchEmailData();
     }
